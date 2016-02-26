@@ -1,0 +1,46 @@
+<!-- views/version.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>CMS</title>
+	<link rel="Shortcut Icon" type="image/x-icon" href="https://forms.latech.edu/routing/i/favicon.ico">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<script src="script.js"></script>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div style="font-size:25pt; color:#FFFFFF; background: #000066; text-align:center; width:100%; margin:0; padding:8px">
+	Content Management System
+</div>
+<div style="font-size:5pt; color:#D9D9D9; background: #D9D9D9; text-align:center; width:100%; margin:0">X</div>
+
+<div class="row bg-warning" style="margin: 20px; padding-left: 40px; padding-right:40px" id="version_tb">
+			<h2><b><u>Revision Control</u></b><%= backup_files.length %></h2>   
+			<table class="table table-striped" align="center">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Title</th>
+						<th>Action</th>
+						<th>Timestamp</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i=0; i<=backup_files.length; i++){ %>
+					<tr>
+						<td><%= (i+1) %></td>
+						<td id ="fname_<%= i %>"></td>
+						<td>View|Delete</td>
+						<td></td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

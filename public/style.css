@@ -1,0 +1,110 @@
+/* public/style.css */
+
+html, body, section, .full-height {
+    height: 100%;
+	padding: 0px;
+	margin:0
+} 
+div {
+    display: block;
+}
+textarea{
+	width: 520px;
+	max-width: 590px;
+	height: 680px;
+	
+}
+textarea:focus{
+	background: #f0f8fc
+}
+#header_row{
+	background: #d0d0e1;
+}
+#feature{
+	height: 150px;
+	width:100px;
+	color:#00B386;
+	font-size: 16pt;
+	font-weight:heavy
+}
+input[type=text] {
+	height: 40px;
+	width: 310px;
+	margin-bottom: 20px;
+	border: 1px solid #b4b4b4;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding: 10px
+}
+
+#green_btn{
+	height: 18px;
+	width: 18px;
+	background: #33cc00;
+	border: none;
+	margin-left: 1px;
+	color: #FFF;
+	padding-bottom: 16px
+}
+#red_btn{
+	height: 18px;
+	width: 18px;
+	background: #cc0000;
+	border: none;
+	margin-left: 3px;
+	color: #FFF;
+	padding-bottom: 2px
+}
+#file_css{
+	height: 20px;
+	width: 86px;
+	margin-left: 2px;
+	margin-bottom: 3px;
+	border: 1px solid #b4b4b4;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 1px;
+	padding: 2px
+}
+input[type=submit] {
+    width: 80px;
+	height:35px;
+	color: #f3f3f3;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background-image: -moz-linear-gradient(top, #0cb114, #07580b); /* FF3.6 */
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #008eb3),color-stop(1, #00cbff)); /* Saf4+, Chrome */
+	-webkit-box-shadow: #4b4b4b 0px 2px 5px;
+	-moz-box-shadow: #4e4e4e 0px 2px 5px;
+	box-shadow: #e3e3e3 0px 2px 5px;
+	border: none;
+}
+
+#pad{
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+	
+}
+
+#markdown {
+    overflow: auto;
+    
+}
+.collapsibleList li{
+  list-style-image:url('images/button.png');
+  cursor:auto;
+}
+
+li.collapsibleListOpen{
+  list-style-image:url('images/button-open.png');
+  cursor:pointer;
+}
+
+li.collapsibleListClosed{
+  list-style-image:url('images/button-closed.png');
+  cursor:pointer;
+}

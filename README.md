@@ -20,6 +20,10 @@ The easiest way to get started with this project is:
 3. Run the application using:
 
    node server.js
+
+Other Dependencies:
+
+The database used in this project is MySQL Workbench. So, you need to create a table and update connection details in config/passport.js. Also, redis-server 2.4.2 must be running at the server in order to provide collaborative environment.
    
 
 

@@ -1,10 +1,12 @@
 /* public/script.js */
 function show_versions(user_name){
+	document.getElementById('version_tb').style.display = "";
 	var proj_name = document.getElementById('directories').value;
+	document.getElementById("mytext").value = proj_name;
 	// ./backup_projects/mja034/Demo_projects_backup/
 	var path = "./backup_projects/" +  user_name +"/"+ proj_name + "_backup/";
 	var str;
-	alert("version");
+	
 	$.ajax({
 				type: "POST",
 				url: "/version",	
@@ -12,20 +14,39 @@ function show_versions(user_name){
 				cache: false,
 				timeout: 15000,
 				success: function(data){
-					/*for(var i = 0; i< data.length; i++){
-						alert(data[i]);
+					
+					for(var i = 0; i< data.backup_files.length; i++){
 						str = 'fname_'+i;
-						alert(str);
-						document.getElementById(str).innerHTML = data[i];
-					} */
-					alert(data);
-					window.location("version.ejs");
+						str1 = 't_'+i;
+						action = 'action_'+i;
+						document.getElementById(str).innerHTML = data.backup_files[i];
+						document.getElementById(action).innerHTML = "<input type='button' class='btn btn-danger btn-xs' onclick='delete_backup("+i+")' value='Delete' name='delete_"+i+"'"+">";
+						document.getElementById(str1).innerHTML = "<i>Last Modified on "+data.timestamp[i]+"</i>";
+					} 
 				}
 		});
 	
 	
 }
-
+function delete_backup(i){
+	alert("Delete Button");
+	var user_name = document.getElementById('email_id').value;
+	var proj_name = document.getElementById('directories').value;
+	var path = "./backup_projects/" +  user_name +"/"+ proj_name + "_backup/"+proj_name+"_"+(i+1);
+	alert(path);
+	$.ajax({
+				type: "POST",
+				url: "/delete_backup",	
+				data: {path: path},
+				cache: false,
+				timeout: 15000,
+				success: function(data){
+					alert(data);
+					location.reload();
+				}
+		});
+	
+}
 function getFileName(file, ul_id){
 	var file_path = file.getAttribute('href');
 	// if user clicks on new, then a textbox is created
@@ -86,7 +107,8 @@ function getFileName(file, ul_id){
 					cache: false,
 					timeout: 15000,
 					success: function(data){
-						editor.setValue(data);
+						alert(data);
+						document.getElementById('pad').innerHTML = data;
 					}
 				});
 	}
@@ -95,7 +117,7 @@ function reload_div(){
 	location.reload();
 }
 function save_file(email){
-	var pad = editor.getValue();
+	var pad = document.getElementById('pad').value;
 	var file_dir = document.getElementById('current_file').innerHTML;
 	var file_dir_value = file_dir.split("&gt;");
 	var file_path = "./projects/"+email+"/"+file_dir_value[0]+"/"+file_dir_value[1];
@@ -109,8 +131,8 @@ function save_file(email){
 					alert(data);
 				}
 		});
-
 }
+
 function delete_file(email){
 	var file_dir = document.getElementById('current_file').innerHTML;
 	var file_dir_value = file_dir.split("&gt;");
@@ -126,7 +148,6 @@ function delete_file(email){
 					location.reload();
 				}
 		});
-
 }
 function start_revision(email){
 	var file_dir = document.getElementById('current_file').innerHTML;
@@ -153,22 +174,46 @@ window.onload = function() {
 	
 	// make the list with the ID 'newList' collapsible
 	//CollapsibleLists.applyTo(document.getElementById('newList'));
-	
+
     var converter = new showdown.Converter();
+    var pad = document.getElementById('pad');
     var markdownArea = document.getElementById('markdown'); 
 	
+    // make the tab act like a tab
+    pad.addEventListener('keydown',function(e) {
+        if(e.keyCode === 9) { // tab was pressed
+            // get caret position/selection
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+
+            var target = e.target;
+            var value = target.value;
+
+            // set textarea value to: text before caret + tab + text after caret
+            target.value = value.substring(0, start)
+                            + "\t"
+                            + value.substring(end);
+
+            // put caret at right position again (add one for the tab)
+            this.selectionStart = this.selectionEnd = start + 1;
+
+            // prevent the focus lose
+            e.preventDefault();
+        }
+    });
+
     var previousMarkdownValue;          
 
     // convert text area to markdown html
     var convertTextAreaToMarkdown = function(){
-        var markdownText = editor.getValue();
+        var markdownText = pad.value;
         previousMarkdownValue = markdownText;
         html = converter.makeHtml(markdownText);
         markdownArea.innerHTML = html;
     };
 
     var didChangeOccur = function(){
-        if(previousMarkdownValue != editor.getValue()){
+        if(previousMarkdownValue != pad.value){
             return true;
         }
         return false;
@@ -182,19 +227,19 @@ window.onload = function() {
     }, 1000);
 
     // convert textarea on input change
-    editor.getValue().addEventListener('input', convertTextAreaToMarkdown);
+    pad.addEventListener('input', convertTextAreaToMarkdown);
 
     // ignore if on home page
     if(document.location.pathname.length > 1){
         // implement share js
         var documentName = document.location.pathname.substring(1);
         sharejs.open(documentName, 'text', function(error, doc) {
-            doc.attach_textarea(editor.getValue());
+            doc.attach_textarea(pad);
             convertTextAreaToMarkdown();
         });        
     }
 
     // convert on page load
     convertTextAreaToMarkdown();
-
+	
 };

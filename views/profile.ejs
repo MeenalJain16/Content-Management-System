@@ -46,7 +46,7 @@
 				
 			</div>
 			<div class="col-md-6 text-center">
-						<input type="hidden" name="email" value=<%= email %>>
+						<input type="hidden" name="email" value=<%= email %> id="email_id">
 						<div class="form-group">
 							<h4><b><em>Start a new project or open/revise an existing one!</em></b></h4>
 							<input type="text" class="form-control" name="directories" id="directories" placeholder="Enter Project Directory Name">
@@ -57,7 +57,41 @@
 		</div>
 		
 	</form>
-	
+	<div class="row bg-warning" style="margin: 20px; padding-left: 40px; padding-right:40px; display:none"  id="version_tb">
+			 <form method="POST" action="/versions"> 
+				<input type="hidden" name="email" value=<%= email %> id="email_id">
+				<input type="hidden" name="mytext" id="mytext">
+				<div class="table-header">
+					<div class="pull-left">
+						<h2><b><u>Revision Control</u></b></h2>
+					</div>
+					<div class="pull-right">
+						<h2><input type="submit" class="btn btn-success btn-md" value="View All"></h2>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</form>
+			<table class="table table-striped" align="center">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Title</th>
+						<th>Action</th>
+						<th>Timestamp</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i=0; i<=backup_files.length; i++){ %>
+					<tr>
+						<td><%= (i+1) %></td>
+						<td id ="fname_<%= i %>"></td>
+						<td id="action_<%= i %>"></td>
+						<td id="t_<%= i %>"></td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+	</div>
 	<div class="row bg-primary" style="margin: 20px; padding: 20px">
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">

@@ -8,11 +8,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 	<script type="text/javascript" src="CollapsibleLists.js"></script>
+	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.2/dist/showdown.min.js"></script>
+    
+    <script src="/share/share.uncompressed.js"></script>
+    <script src="/share/textarea.js"></script>
+    <script src="script.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 	<script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
-	<script src="codemirror-5.11/lib/codemirror.js"></script>
-	<link rel="stylesheet" href="codemirror-5.11/lib/codemirror.css">
-	<script src="codemirror-5.11/mode/javascript/javascript.js"></script>
 </head>
 <body>
 <div style="font-size:23pt; color:#FFFFFF; background: #000066; text-align:center; width:100%; margin:0; padding:4px">
@@ -64,8 +66,14 @@ Content Management System
 </body>
 </html>
 <script>
-	
-	var editor = CodeMirror.fromTextArea(pad, {
+	/* $(function() {
+		$(".lined").linedtextarea(
+			{selectedLine: 1}
+		);
+		// Target a single one
+		//$("#pad").linedtextarea();
+	});
+	 var editor = CodeMirror.fromTextArea(pad, {
 		lineWrapping : true,
         lineNumbers: true,
 		matchBrackets: true,
@@ -81,11 +89,8 @@ Content Management System
 			main: "lib/codemirror"
 		  }]
 	});
-	shareDoc.attachCodeMirror(editor);
+	var s = new BCSocket(null, {reconnect: true});
+	var sjs = new window.sharejs.Connection(s);
+	var doc = sjs.get('users', 'sephx');
+	shareDoc.attachCodeMirror(editor); */
 </script>
-<script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.2/dist/showdown.min.js"></script>
-<script src="/channel/bcsocket.js"></script>
-<script src="/share/share.uncompressed.js"></script>
-<script src="/share/textarea.js"></script>
-<script src="/share-codemirror.js"></script>
-<script src="script.js"></script>

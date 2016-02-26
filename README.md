@@ -1,5 +1,5 @@
 
-<h2>Real-time Collaborative Web Content management System</h2>
+<h2>Real-time Collaborative Web Content Management System</h2>
 
 Installation Guidelines:
 
